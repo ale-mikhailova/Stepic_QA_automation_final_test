@@ -17,7 +17,7 @@ class ProductPage(BasePage):
 
     def should_be_product_name_in_notification(self):
         self.product_name_in_notification = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME_ADDED_NOTIFICATION).text
-        assert self.product_name in self.product_name_in_notification, "Наименования товаров не совпадают"
+        assert self.product_name == self.product_name_in_notification, "Наименования товаров не совпадают"
 
     def should_be_product_price_in_notification(self):
         self.product_price_in_notification = self.browser.find_element(*ProductPageLocators.BASKET_TOTAL_NOTIFICATION).text

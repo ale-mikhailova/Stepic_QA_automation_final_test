@@ -1,3 +1,4 @@
+import pytest
 from .pages.main_page import ProductPage
 from .pages.login_page import LoginPage
 from selenium.webdriver.common.by import By
