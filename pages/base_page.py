@@ -13,22 +13,36 @@ class BasePage():
     def open_browser(self):
         self.browser.get(self.url)
 
-    def is_element_present(self, how, what):
+    def is_element_present(self, method, css_selector):
         try:
-            self.browser.find_element(how, what)
+            self.browser.find_element(method, css_selector)
         except (NoSuchElementException):
             return False
         return True
 
-    def solve_quiz_and_get_code(self):
-        WebDriverWait(self.browser, 3).until(EC.alert_is_present())
+    def is_not_element_present(self, method, css_selector, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((method, css_selector)))
+        except TimeoutException:
+            return True
+        return False
+
+    def is_disappeared(self, method, css_selector, timeout=4):
+        try:
+            WebDriverWait(self.browser, timeout, 1, TimeoutException).until_not(EC.presence_of_element_located((method, css_selector)))
+        except TimeoutException:
+            return False
+        return True
+
+    def solve_quiz_and_get_code(self, timeout=4):
+        WebDriverWait(self.browser, timeout).until(EC.alert_is_present())
         alert = self.browser.switch_to.alert
         x = alert.text.split(" ")[2]
         answer = str(math.log(abs((12 * math.sin(float(x))))))
         alert.send_keys(answer)
         alert.accept()
         try:
-            WebDriverWait(self.browser, 5).until(EC.alert_is_present())
+            WebDriverWait(self.browser, timeout).until(EC.alert_is_present())
             alert = self.browser.switch_to.alert
             alert_text = alert.text
             print(f"Your code: {alert_text}")
