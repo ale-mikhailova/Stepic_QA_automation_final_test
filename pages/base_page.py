@@ -3,6 +3,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from .locators import BasePageLocators
+from .locators import BasketPageLocators
 import math
 
 class BasePage():
@@ -17,13 +18,22 @@ class BasePage():
 
 
     def should_be_login_link(self):
-        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not present"
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Кнопка логин отсутствует"
     
 
     def go_to_login_page(self):
         login_link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         login_link.click()
     
+
+    def should_go_to_basket_button(self):
+        assert self.is_element_present(*BasketPageLocators.BASKET_BUTTON), "Кнопка Перейти в корзину отсутствует"
+
+
+    def go_to_basket_page(self):
+        login_link = self.browser.find_element(*BasketPageLocators.BASKET_BUTTON)
+        login_link.click()
+
 
     def is_element_present(self, method, css_selector):
         try:

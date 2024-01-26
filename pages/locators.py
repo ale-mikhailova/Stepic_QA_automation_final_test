@@ -19,3 +19,9 @@ class ProductPageLocators():
     PRODUCT_NAME_ADDED_NOTIFICATION = (By.CSS_SELECTOR, "div.alertinner strong")
     BASKET_TOTAL_NOTIFICATION = (By.CSS_SELECTOR, ".alertinner p strong")
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, ".alert-success")
+
+class BasketPageLocators():
+    BASKET_BUTTON = (By.CSS_SELECTOR, "a[href$='/basket/']")
+    EMPTY_BASKET_TEXT = (By.CSS_SELECTOR, "#content_inner p")
+    BASKET_ITEMS = (By.CSS_SELECTOR, ".basket-items > div.row")
+
