@@ -26,7 +26,7 @@ class BasePage():
         login_link.click()
     
 
-    def should_go_to_basket_button(self):
+    def should_see_basket_button(self):
         assert self.is_element_present(*BasketPageLocators.BASKET_BUTTON), "Кнопка Перейти в корзину отсутствует"
 
 
